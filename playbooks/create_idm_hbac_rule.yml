@@ -1,0 +1,32 @@
+---
+- name: Create HBAC rule in Red Hat IDM 
+  hosts: "{{ all | default('ipaserver') }}"
+  become: false
+  vars_files: ../vault.yml
+  tasks:
+    - name: Create a HBAC rule
+      redhat.rhel_idm.ipahbacrule:
+        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
+        ipaadmin_password: "{{ idm_ops_admin_password }}"
+        name: "{{ ipa_hbac_rule_name }}"
+    - name: Add hostgroup to a HBAC rule
+      redhat.rhel_idm.ipahbacrule:
+        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
+        ipaadmin_password: "{{ idm_ops_admin_password }}"
+        name: "{{ ipa_hbac_rule_name }}"
+        hostgroup: "{{ ipa_hbac_hostgroup_name }}"
+        action: member
+    - name: Add usergroup to a HBAC rule
+      redhat.rhel_idm.ipahbacrule:
+        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
+        ipaadmin_password: "{{ idm_ops_admin_password }}"
+        name: "{{ ipa_hbac_rule_name }}"
+        group: "{{ ipa_group_name }}"
+        action: member
+    - name: Add service to a HBAC rule
+      redhat.rhel_idm.ipahbacrule:
+        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
+        ipaadmin_password: "{{ idm_ops_admin_password }}"
+        name: "{{ ipa_hbac_rule_name }}"
+        hbacsvc: "{{ ipa_hbac_service_name }}"
+        action: member

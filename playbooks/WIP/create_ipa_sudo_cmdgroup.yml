@@ -1,0 +1,18 @@
+---
+- name: create a sudo command group in our freeipa instance
+  hosts: "{{ all | default('ipaserver') }}"
+  become: false
+  vars_files: ../vault.yml
+  tasks:
+    - name: Create an ipa sudo command group
+      ipasudocmdgroup:
+        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
+        ipaadmin_password: "{{ ipa_admin_password }}"
+        name: "{{ ipa_sudo_cmd_group }}"
+    - name: add a command to sudo command group
+      ipasudocmdgroup:
+        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
+        ipaadmin_password: "{{ ipa_admin_password }}"
+        name: "{{ ipa_sudo_cmd_group }}"
+        sudocmd: "{{ ipa_sudo_command }}"
+        action: member
