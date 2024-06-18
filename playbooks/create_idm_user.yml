@@ -1,0 +1,18 @@
+---
+- name: Create a user in IDM
+  hosts: "{{ all | default('ipaserver') }}"
+  become: false
+  vars_files: ../vault.yml
+  tasks:
+    - name: Create an IDM User
+      redhat.rhel_idm.ipauser:
+        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
+        ipaadmin_password: "{{ idm_ops_admin_password }}"
+        name: "{{ idm_ops_user_name }}"
+        first: "{{ idm_ops_user_firstname }}"
+        last: "{{ idm_ops_user_lastname }}"
+        phone: "{{ idm_ops_user_phone_number }}"
+        email: "{{ idm_ops_user_email_address }}"
+        random: true
+        update_password: on_create
+...
