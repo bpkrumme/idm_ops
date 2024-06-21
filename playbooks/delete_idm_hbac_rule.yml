@@ -1,12 +1,12 @@
 ---
-- name: Delete HBAC rule in freeipa 
+- name: Delete HBAC rule in IDM
   hosts: "{{ all | default('ipaserver') }}"
   become: false
   vars_files: ../vault.yml
   tasks:
-    - name: delete a HBAC rule
-      ipahbacrule:
+    - name: Delete a HBAC rule
+      redhat.rhel_idm.ipahbacrule:
         ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
         ipaadmin_password: "{{ idm_ops_admin_password }}"
-        name: "{{ ipa_hbac_rule_name }}"
+        name: "{{ idm_ops_hbac_rule_name }}"
         state: absent

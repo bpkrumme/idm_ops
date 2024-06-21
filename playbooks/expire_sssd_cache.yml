@@ -1,11 +1,12 @@
 ---
-- name: expire the sssd cache and restart sssd
+- name: Expire the sssd cache and restart sssd
   hosts: all
   tasks:
-    - name: expire the sssd cache
-      command:
+    - name: Expire the sssd cache
+      ansible.builtin.command:
         cmd: 'sss_cache -E'
-    - name: restart sssd
-      service:
+      changed_when: true
+    - name: Restart sssd
+      ansible.builtin.service:
         name: sssd
         state: restarted

@@ -1,5 +1,5 @@
 ---
-- name: Create HBAC rule in Red Hat IDM 
+- name: Create HBAC rule in Red Hat IDM
   hosts: "{{ all | default('ipaserver') }}"
   become: false
   vars_files: ../vault.yml
@@ -30,3 +30,4 @@
         name: "{{ ipa_hbac_rule_name }}"
         hbacsvc: "{{ ipa_hbac_service_name }}"
         action: member
+...

@@ -1,0 +1,11 @@
+---
+- name: Create a sudo command in our IDM instance
+  hosts: "{{ all | default('ipaserver') }}"
+  become: false
+  vars_files: ../vault.yml
+  tasks:
+    - name: Create an IDM sudo command
+      redhat.rhel_idm.ipasudocmd:
+        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
+        ipaadmin_password: "{{ idm_ops_admin_password }}"
+        sudocmd: "{{ idm_ops_sudo_command }}"
