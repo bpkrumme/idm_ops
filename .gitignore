@@ -2,5 +2,5 @@ ansible.cfg
 /artifacts
 ansible-navigator.log
 .password
-satellite_ee/context/
+idm_ee/context/
 .vscode
