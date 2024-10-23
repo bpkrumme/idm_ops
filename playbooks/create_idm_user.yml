@@ -4,6 +4,13 @@
   become: false
   vars_files: ../vault.yml
   tasks:
+    - name: Check if user already exists
+      ansible.builtin.command:
+        cmd: "id {{ idm_ops_user_name }}"
+      register: usercheck
+      changed_when: "usercheck.rc == 1"
+      failed_when: false
+
     - name: Create an IDM User
       redhat.rhel_idm.ipauser:
         ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
@@ -15,4 +22,16 @@
         email: "{{ idm_ops_user_email_address }}"
         random: true
         update_password: on_create
+      when: usercheck.changed == true
+      register: usercreate
+
+    - name: Provide random password
+      ansible.builtin.debug:
+        msg: New user {{ idm_ops_user_name }} created with {{ usercreate.user | to_nice_yaml }}
+      when: usercreate.changed == true
+
+    - name: Report user already exists
+      ansible.builtin.debug:
+        msg: User {{ idm_ops_user_name }} not created.  User already exists
+      when: usercheck.changed == false
 ...

@@ -1,43 +1,32 @@
 [ipaserver]
-idm.bk.mobile
+idm01.bk.lab
+
+[ipareplicas]
+idm02.bk.lab
 
 [satellite]
-satellite.bk.mobile
+satellite.bk.lab
 
 [utility]
-utility.bk.mobile
+utility.bk.lab
 
 [automationcontroller]
-aap.bk.mobile
+controller.bk.lab
+
+[executionnodes]
+execution.bk.lab
 
 [automationhub]
-pah.bk.mobile
+pah.bk.lab
 
 [edaserver]
-eda.bk.mobile
+eda.bk.lab
 
 [postgres]
-postgres.bk.mobile
+postgresql.bk.lab
 
 [aap:children]
 automationcontroller
 automationhub
 edaserver
-postgres
-
-[web]
-web01.bk.mobile
-web02.bk.mobile
-
-[app]
-app01.bk.mobile
-app02.bk.mobile
-
-[sec]
-sec01.bk.mobile
-sec02.bk.mobile
-
-[managed:children]
-web
-app
-sec
+executionnodes

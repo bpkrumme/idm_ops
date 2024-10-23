@@ -1,6 +1,6 @@
 ---
 - name: Remove and delete a user in our IDM instance
-  hosts: "{{ all | default('ipaserver') }}"
+  hosts: '{{ target | default("ipaserver") }}'
   become: false
   vars_files: ../vault.yml
   tasks:

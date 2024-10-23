@@ -1,6 +1,6 @@
 ---
 - name: Create a group in IDM
-  hosts: "{{ all | default('ipaserver') }}"
+  hosts: '{{ target | default("ipaserver") }}'
   become: false
   vars_files: ../vault.yml
   tasks:

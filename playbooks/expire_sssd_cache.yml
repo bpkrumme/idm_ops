@@ -1,6 +1,7 @@
 ---
 - name: Expire the sssd cache and restart sssd
-  hosts: all
+  hosts: '{{ target | default("all") }}'
+  become: true
   tasks:
     - name: Expire the sssd cache
       ansible.builtin.command:
