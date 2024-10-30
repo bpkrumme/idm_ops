@@ -2,11 +2,9 @@
 - name: Remove and delete a user in our IDM instance
   hosts: '{{ target | default("ipaserver") }}'
   become: false
-  vars_files: ../vault.yml
   tasks:
     - name: Remove an IDM User
       redhat.rhel_idm.ipauser:
-        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
         ipaadmin_password: "{{ idm_ops_admin_password }}"
         name: "{{ idm_ops_user_name }}"
         state: absent
