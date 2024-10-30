@@ -3,11 +3,11 @@
   hosts: '{{ target | default("ipaserver") }}'
   become: false
   vars:
-    idm_ops_user_name: "{{ idm_ops_user_firstname }}.{{ idm_ops_user_lastname }}"
+    idm_ops_user_name: "{{ idm_ops_user_firstname[:1] }}.{{ idm_ops_user_lastname }}"
   tasks:
     - name: Check if user already exists
       ansible.builtin.command:
-        cmd: "id {{ idm_ops_user_firstname }}.{{ idm_ops_user_lastname }}"
+        cmd: "id {{ idm_ops_user_name }}"
       register: usercheck
       changed_when: "usercheck.rc == 1"
       failed_when: false
