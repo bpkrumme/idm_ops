@@ -6,20 +6,18 @@
   tasks:
     - name: Check if user already exists
       ansible.builtin.command:
-        cmd: "id {{ idm_ops_user_name }}"
+        cmd: "id {{ idm_ops_user_firstname }}.{{ idm_ops_user_lastname }}"
       register: usercheck
       changed_when: "usercheck.rc == 1"
       failed_when: false
 
     - name: Create an IDM User
       redhat.rhel_idm.ipauser:
-        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
-        ipaadmin_password: "{{ idm_ops_admin_password }}"
-        name: "{{ idm_ops_user_name }}"
+        name: "{{ idm_ops_user_firstname}}.{{ idm_ops_user_lastname }}"
         first: "{{ idm_ops_user_firstname }}"
         last: "{{ idm_ops_user_lastname }}"
-        phone: "{{ idm_ops_user_phone_number }}"
-        email: "{{ idm_ops_user_email_address }}"
+        phone: "{{ idm_ops_user_phone_number | default(omit) }}"
+        email: "{{ idm_ops_user_firstname }}.{{ idm_ops_user_lastname }}@{{ ipaserver_domain }}"
         random: true
         update_password: on_create
       when: usercheck.changed == true
