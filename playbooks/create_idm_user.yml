@@ -2,7 +2,6 @@
 - name: Create a user in IDM
   hosts: '{{ target | default("ipaserver") }}'
   become: false
-  vars_files: ../vault.yml
   tasks:
     - name: Check if user already exists
       ansible.builtin.command:
