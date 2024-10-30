@@ -1,0 +1,12 @@
+---
+- name: Delete a host from IDM
+  hosts: '{{ target | default("all") }}'
+  become: false
+  tasks:
+    - name: Ensure IDM Host is Absent
+      redhat.rhel_idm.ipahost:
+        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
+        ipaadmin_password: "{{ idm_ops_admin_password }}"
+        name: "{{ idm_ops_host_name }}"
+        state: absent
+        update_dns: true
