@@ -7,6 +7,6 @@
       redhat.rhel_idm.ipahost:
         ipaadmin_principal: "{{ ipaadmin_principal | default('admin') }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ virt_ops_vm_name }}"
+        name: "{{ vm_name }}"
         state: absent
         update_dns: true
