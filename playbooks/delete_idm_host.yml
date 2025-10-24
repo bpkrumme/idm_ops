@@ -1,6 +1,6 @@
 ---
 - name: Delete a host from IDM
-  hosts: '{{ ipaserver | default("sat_hostcollection_idmserver") }}'
+  hosts: '{{ target | default("ipaserver") }}'
   become: false
   tasks:
     - name: Ensure IDM Host is Absent
