@@ -8,7 +8,7 @@ ansible-navigator:
     container-engine: auto
     enabled: true
     pull:
-      policy: missing
+      policy: always
     image: production-aap.apps.ocp.bk.lab/homelab_ees/idm_ee:latest
   playbook-artifact:
     enable: true
