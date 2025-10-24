@@ -14,7 +14,6 @@
 
     - name: Create an IDM User
       redhat.rhel_idm.ipauser:
-        ipaadmin_password: "{{ idm_ops_admin_password }}"
         name: "{{ idm_ops_user_name }}"
         first: "{{ idm_ops_user_firstname }}"
         last: "{{ idm_ops_user_lastname }}"

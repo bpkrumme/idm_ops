@@ -6,8 +6,6 @@
   tasks:
     - name: Remove and preserve an IDM User
       redhat.rhel_idm.ipauser:
-        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
-        ipaadmin_password: "{{ idm_ops_admin_password }}"
         name: "{{ idm_ops_user_name }}"
         preserve: true
         state: absent

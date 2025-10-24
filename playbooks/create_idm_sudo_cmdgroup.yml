@@ -2,17 +2,12 @@
 - name: Create a sudo command group in our IDM instance
   hosts: '{{ target | default("ipaserver") }}'
   become: false
-  vars_files: ../vault.yml
   tasks:
     - name: Create an IDM sudo command group
       redhat.rhel_idm.ipasudocmdgroup:
-        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
-        ipaadmin_password: "{{ idm_ops_admin_password }}"
         name: "{{ idm_ops_sudo_cmd_group }}"
     - name: Add a command to sudo command group
       redhat.rhel_idm.ipasudocmdgroup:
-        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
-        ipaadmin_password: "{{ idm_ops_admin_password }}"
         name: "{{ idm_ops_sudo_cmd_group }}"
         sudocmd: "{{ idm_ops_sudo_command }}"
         action: member

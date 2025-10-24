@@ -6,7 +6,5 @@
   tasks:
     - name: Delete a HBAC rule
       redhat.rhel_idm.ipahbacrule:
-        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
-        ipaadmin_password: "{{ idm_ops_admin_password }}"
         name: "{{ idm_ops_hbac_rule_name }}"
         state: absent

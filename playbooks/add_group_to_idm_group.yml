@@ -4,8 +4,6 @@
   tasks:
     - name: Add user to IDM group
       redhat.rhel_idm.ipagroup:
-        ipaadmin_principal: "{{ ipaadmin_principal | default('admin') }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ idm_ops_group_name }}"
         group:
           - "{{ idm_ops_groupadd_name }}"

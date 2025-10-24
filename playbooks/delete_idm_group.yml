@@ -2,12 +2,9 @@
 - name: Delete a group in our IDM instance
   hosts: '{{ target | default("ipaserver") }}'
   become: false
-  vars_files: ../vault.yml
   tasks:
     - name: Delete an IDM Group
       redhat.rhel_idm.ipagroup:
-        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
-        ipaadmin_password: "{{ idm_ops_admin_password }}"
         name: "{{ idm_ops_group_name }}"
         state: absent
 ...

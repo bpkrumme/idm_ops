@@ -1,12 +1,9 @@
 ---
 - name: Add a user to a group in our IDM instance
   hosts: '{{ target | default("ipaserver") }}'
-  vars_files: ../vault.yml
   tasks:
     - name: Add user to IDM group
       redhat.rhel_idm.ipagroup:
-        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
-        ipaadmin_password: "{{ idm_ops_admin_password }}"
         name: "{{ idm_ops_group_name }}"
         user:
           - "{{ idm_ops_user_name }}"

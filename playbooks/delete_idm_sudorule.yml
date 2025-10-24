@@ -6,7 +6,5 @@
   tasks:
     - name: Delete an IDM sudo rule
       redhat.rhel_idm.ipasudorule:
-        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
-        ipaadmin_password: "{{ idm_ops_admin_password }}"
         name: "{{ idm_ops_sudo_rule }}"
         state: absent

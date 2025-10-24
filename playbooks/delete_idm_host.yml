@@ -5,8 +5,6 @@
   tasks:
     - name: Ensure IDM Host is Absent
       redhat.rhel_idm.ipahost:
-        ipaadmin_principal: "{{ ipaadmin_principal | default('admin') }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ vm_name }}"
         state: absent
         update_dns: true
