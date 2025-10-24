@@ -2,11 +2,10 @@
 - name: Create a group in IDM
   hosts: '{{ target | default("ipaserver") }}'
   become: false
-  vars_files: ../vault.yml
   tasks:
     - name: Create an IDM group
       redhat.rhel_idm.ipagroup:
-        ipaadmin_principal: "{{ idm_ops_admin_username | default(omit) }}"
-        ipaadmin_password: "{{ idm_ops_admin_password }}"
+        ipaadmin_principal: "{{ ipaadmin_principal | default('admin') }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ idm_ops_group_name }}"
 ...
