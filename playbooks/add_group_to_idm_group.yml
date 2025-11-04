@@ -6,6 +6,5 @@
       redhat.rhel_idm.ipagroup:
         name: "{{ idm_ops_group_name }}"
         groups:
-          group:
-            name: "{{ idm_ops_groupadd_name }}"
+          - name: "{{ idm_ops_groupadd_name }}"
         action: group
