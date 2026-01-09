@@ -1,6 +1,6 @@
 ---
 - name: Remove and delete a user in our IDM instance
-  hosts: '{{ target | default("ipaserver") }}'
+  hosts: "{{ target | default('ipaserver') }}"
   become: false
   tasks:
     - name: Remove an IDM User

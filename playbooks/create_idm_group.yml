@@ -1,6 +1,6 @@
 ---
 - name: Create a group in IDM
-  hosts: '{{ target | default("ipaserver") }}'
+  hosts: "{{ target | default('ipaserver') }}"
   become: false
   tasks:
     - name: Create an IDM group
