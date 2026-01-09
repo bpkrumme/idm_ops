@@ -1,6 +1,6 @@
 ---
 - name: Delete a group in our IDM instance
-  hosts: '{{ target | default("ipaserver") }}'
+  hosts: "{{ target | default('ipaserver') }}"
   become: false
   tasks:
     - name: Delete an IDM Group
