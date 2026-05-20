@@ -21,13 +21,13 @@
         email: "{{ idm_ops_user_name }}@{{ ipaserver_domain }}"
         random: true
         update_password: on_create
-      when: usercheck.changed == true
+      when: usercheck.changed
       register: usercreate
 
     - name: Provide random password
       ansible.builtin.debug:
         msg: New user {{ idm_ops_user_name }} created with {{ usercreate.user | to_nice_yaml }}
-      when: usercreate.changed == true
+      when: usercreate.changed
 
     - name: Report user already exists
       ansible.builtin.debug:

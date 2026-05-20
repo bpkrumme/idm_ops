@@ -8,3 +8,4 @@
         name: "{{ vm_name }}"
         state: absent
         update_dns: true
+        ipaadmin_password: "{{ ipaadmin_password }}"

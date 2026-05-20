@@ -1,0 +1,59 @@
+---
+- name: Create a user in IDM
+  hosts: "{{ target | default('ipaserver') }}"
+  become: false
+  vars:
+    idm_ops_user_name: "{{ idm_ops_user_firstname[:1] | lower }}{{ idm_ops_user_lastname | lower }}"
+  tasks:
+    - name: Check for user and create if not exists
+      block:
+        - name: Check if user exists
+          ansible.builtin.command:
+            cmd: "id {{ idm_ops_user_name }}"
+          register: usercheck
+          changed_when: false
+      rescue:
+        - name: Create the IDM user
+          redhat.rhel_idm.ipauser:
+            name: "{{ idm_ops_user_name }}"
+            first: "{{ idm_ops_user_firstname }}"
+            last: "{{ idm_ops_user_lastname }}"
+            phone: "{{ idm_ops_user_phone_number | default(omit) }}"
+            email: "{{ idm_ops_user_name }}@{{ ipaserver_domain }}"
+            random: True
+            update_password: on_create
+          register: usercreate
+
+        - name: Provide the random password
+          ansible.builtin.debug:
+            msg: New user {{ idm_ops_user_name }} created with {{ usercreate.user | to_nice_yaml }}
+
+
+#    - name: Check if user already exists
+#      ansible.builtin.command:
+#        cmd: "id {{ idm_ops_user_name }}"
+#      register: usercheck
+#      changed_when: "usercheck.rc == 1"
+#      failed_when: false
+#
+#    - name: Create an IDM User
+#      redhat.rhel_idm.ipauser:
+#        name: "{{ idm_ops_user_name }}"
+#        first: "{{ idm_ops_user_firstname }}"
+#        last: "{{ idm_ops_user_lastname }}"
+#        phone: "{{ idm_ops_user_phone_number | default(omit) }}"
+#        email: "{{ idm_ops_user_name }}@{{ ipaserver_domain }}"
+#        random: true
+#        update_password: on_create
+#      register: usercreate
+#
+#    - name: Provide random password
+#      ansible.builtin.debug:
+#        msg: New user {{ idm_ops_user_name }} created with {{ usercreate.user | to_nice_yaml }}
+#      when: usercreate.changed
+#
+#    - name: Report user already exists
+#      ansible.builtin.debug:
+#        msg: User {{ idm_ops_user_name }} not created.  User already exists
+#      when: usercheck.changed == false
+...
