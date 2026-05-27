@@ -1,7 +1,7 @@
 ---
 - name: Delete a group in our IDM instance
   hosts: "{{ target | default('ipaserver') }}"
-  become: false
+  become: true
   tasks:
     - name: Delete an IDM Group
       redhat.rhel_idm.ipagroup:
