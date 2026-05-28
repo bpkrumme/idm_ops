@@ -1,7 +1,7 @@
 ---
 - name: Create a sudo command in our IDM instance
   hosts: "{{ target | default('ipaserver') }}"
-  become: false
+  become: true
   vars_files: ../vault.yml
   tasks:
     - name: Create an IDM sudo command

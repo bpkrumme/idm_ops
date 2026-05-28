@@ -1,7 +1,7 @@
 ---
 - name: Create a sudo command group in our IDM instance
   hosts: "{{ target | default('ipaserver') }}"
-  become: false
+  become: true
   tasks:
     - name: Create an IDM sudo command group
       redhat.rhel_idm.ipasudocmdgroup:

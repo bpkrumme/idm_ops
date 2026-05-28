@@ -1,7 +1,7 @@
 ---
 - name: Remove and delete a user in our IDM instance
   hosts: "{{ target | default('ipaserver') }}"
-  become: false
+  become: true
   tasks:
     - name: Remove an IDM User
       redhat.rhel_idm.ipauser:

@@ -1,6 +1,7 @@
 ---
 - name: Add a group to a group in our IDM instance
   hosts: "{{ target | default('ipaserver') }}"
+  become: true
   tasks:
     - name: Add group to IDM group
       redhat.rhel_idm.ipagroup:

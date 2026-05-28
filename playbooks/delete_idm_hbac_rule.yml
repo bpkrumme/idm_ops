@@ -1,7 +1,7 @@
 ---
 - name: Delete HBAC rule in IDM
   hosts: "{{ target | default('ipaserver') }}"
-  become: false
+  become: true
   vars_files: ../vault.yml
   tasks:
     - name: Delete a HBAC rule

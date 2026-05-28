@@ -1,7 +1,7 @@
 ---
 - name: Enable a disabled user in our IDM instance
   hosts: "{{ target | default('ipaserver') }}"
-  become: false
+  become: true
   vars_files: ../vault.yml
   tasks:
     - name: Enable an IDM User

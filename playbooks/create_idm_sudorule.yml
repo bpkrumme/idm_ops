@@ -1,7 +1,7 @@
 ---
 - name: Create or update a sudo rule in our IDM instance
   hosts: "{{ target | default('ipaserver') }}"
-  become: false
+  become: true
   vars_files: ../vault.yml
   tasks:
     - name: Create or update an IDM sudo rule

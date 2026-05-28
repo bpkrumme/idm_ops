@@ -1,7 +1,7 @@
 ---
 - name: Delete a sudo command group in our IDM instance
   hosts: "{{ target | default('ipaserver') }}"
-  become: false
+  become: true
   vars_files: ../vault.yml
   tasks:
     - name: Delete an IDM sudo command group

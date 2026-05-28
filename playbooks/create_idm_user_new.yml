@@ -1,7 +1,7 @@
 ---
 - name: Create a user in IDM
   hosts: "{{ target | default('ipaserver') }}"
-  become: false
+  become: true
   vars:
     idm_ops_user_name: "{{ idm_ops_user_firstname[:1] | lower }}{{ idm_ops_user_lastname | lower }}"
   tasks:

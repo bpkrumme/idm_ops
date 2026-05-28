@@ -1,7 +1,7 @@
 ---
 - name: Unlock a user in our IDM instance
   hosts: "{{ target | default('ipaserver') }}"
-  become: false
+  become: true
   vars_files: ../vault.yml
   tasks:
     - name: Unlock an IDM User
